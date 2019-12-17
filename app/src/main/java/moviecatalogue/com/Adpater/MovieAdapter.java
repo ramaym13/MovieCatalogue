@@ -4,72 +4,62 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 import moviecatalogue.com.Data.Movie;
 import moviecatalogue.com.R;
 
-public class MovieAdapter extends BaseAdapter {
+public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
     private Context mContext;
-    private ArrayList<Movie> listMovie = new ArrayList<>();
+    private ArrayList<Movie> mList;
 
-    public void setListMovie(ArrayList<Movie> listMovie) {
-        this.listMovie = listMovie;
+    public void setmList(ArrayList<Movie> mList) {
+        this.mList = mList;
     }
 
     public MovieAdapter(Context mContext) {
         this.mContext = mContext;
     }
 
+    @NonNull
     @Override
-    public int getCount() {
-        return listMovie.size();
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.list_item_movie
+        ,parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
-    public Object getItem(int position) {
-        return listMovie.get(position);
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Movie currentMuvie = mList.get(position);
+        holder.tvTitle.setText(currentMuvie.getTitle());
+        holder.tvDecs.setText(currentMuvie.getDescription());
+        holder.imgPoster.setImageResource(currentMuvie.getPoster());
     }
 
     @Override
-    public long getItemId(int position) {
-        return position;
+    public int getItemCount() {
+        return mList.size();
     }
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View itemView = convertView;
-        if (itemView == null){
-            itemView = LayoutInflater.from(mContext).inflate(R.layout.list_item_movie, parent, false);
-        }
+    class ViewHolder extends RecyclerView.ViewHolder {
 
-        ViewHolder viewHolder = new ViewHolder(itemView);
-
-        Movie movie = (Movie) getItem(position);
-        viewHolder.bind(movie);
-
-        return itemView;
-    }
-
-    private class ViewHolder{
-        TextView tvTitle, tvDesc;
+        TextView tvTitle, tvDecs;
         ImageView imgPoster;
 
-        ViewHolder(View view){
-            tvTitle = view.findViewById(R.id.tc_title);
-            tvDesc = view.findViewById(R.id.tv_description);
-            imgPoster = view.findViewById(R.id.img_poster);
-        }
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
 
-        private void bind(Movie movie){
-            tvTitle.setText(movie.getTitle());
-            tvDesc.setText(movie.getDescription());
-            imgPoster.setImageResource(movie.getPoster());
+            tvTitle = itemView.findViewById(R.id.tc_title);
+            tvDecs = itemView.findViewById(R.id.tv_description);
+            imgPoster = itemView.findViewById(R.id.img_poster);
         }
     }
 }

@@ -5,6 +5,9 @@
     <string name="desk">Once home to the most advanced civilization on Earth, Atlantis is now an underwater kingdom ruled by the power-hungry King Orm. With a vast army at his disposal, Orm plans to conquer the remaining oceanic people and then the surface world. Standing in his way is Arthur Curry, Orms half-human, half-Atlantean brother and true heir to the throne.</string>
     <string name="overwiew">Overview</string>
 
+    <string name="movie">Movie</string>
+    <string name="tv_show">Tv Show</string>
+
     <string-array name="title">
         <item>Avengers: Infinity War</item>
         <item>A Star Is Born</item>
@@ -43,5 +46,9 @@
         <item>@drawable/poster_spiderman</item>
         <item>@drawable/poster_venom</item>
     </array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="setting">setting</string>
 
 </resources>
